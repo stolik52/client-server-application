@@ -1,0 +1,43 @@
+import requests
+
+BASE_URL = "http://localhost:8000/users"
+
+
+def create_user(email: str, full_name: str):
+    """Создание нового пользователя"""
+    response = requests.post(BASE_URL, json={"email": email, "full_name": full_name})
+    if response.status_code == 200:
+        print("✅ Пользователь успешно создан:", response.json())
+    else:
+        print("❌ Ошибка при создании пользователя:", response.json())
+
+
+def get_user(email: str):
+    """Получение информации о пользователе"""
+    response = requests.get(f"{BASE_URL}/{email}")
+    if response.status_code == 200:
+        print("✅ Пользователь найден:", response.json())
+    else:
+        print("❌ Пользователь не найден:", response.json())
+
+
+if __name__ == "__main__":
+    while True:
+        print("\nМеню:")
+        print("1. Создать пользователя")
+        print("2. Получить информацию о пользователе")
+        print("3. Выйти")
+        choice = input("Выберите действие: ")
+
+        if choice == "1":
+            email = input("Введите email: ")
+            full_name = input("Введите ФИО: ")
+            create_user(email, full_name)
+        elif choice == "2":
+            email = input("Введите email: ")
+            get_user(email)
+        elif choice == "3":
+            print("👋 Выход из программы.")
+            break
+        else:
+            print("❌ Неверный выбор, попробуйте снова.")
