@@ -1,0 +1,5 @@
+# Сборка Docker-образа
+docker build -t fastapi-app -f "Dockerfile Server" .
+
+# Запуск контейнера
+docker run -d -p 8000:8000 fastapi-app
